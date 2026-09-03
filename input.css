@@ -1,0 +1,22 @@
+/* 1. Importer la police Montserrat depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@import "tailwindcss";
+
+@config "./tailwind.config.js";
+
+/* 2. Configurer la police globale pour Tailwind v4 et la balise body */
+@theme {
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.delay-150 { animation-delay: 150ms; }
+.delay-300 { animation-delay: 470ms; }
+.delay-500 { animation-delay: 670ms; }
