@@ -961,11 +961,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
             </div>
         
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                class="fixed bottom-6 right-6 w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-orange-400 transition-all z-50">
+            <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                class="fixed bottom-6 right-6 w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-orange-500 transition-all duration-300 z-50 opacity-0 pointer-events-none transform translate-y-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18">
-                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                 </svg>
             </button>
         </footer>
@@ -1026,7 +1025,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
     </div>
-
     </main>
 
 
@@ -1045,6 +1043,40 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
 
     <script>
+        // bouton retour en haut
+        document.addEventListener("DOMContentLoaded", () => {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            let lastScrollY = window.scrollY;
+            let hasReachedBottom = false;
+
+            window.addEventListener("scroll", () => {
+                const currentScrollY = window.scrollY;
+                // Calcul de la marge bas (si l'utilisateur touche à ~50px du bas)
+                const isAtBottom = (window.innerHeight + currentScrollY) >= (document.body.offsetHeight - 50);
+            
+                // 1. Marquer qu'on a atteint le bas de la page
+                if (isAtBottom) {
+                    hasReachedBottom = true;
+                }
+            
+                // 2. Si on est tout en haut, réinitialiser l'état
+                if (currentScrollY < 100) {
+                    hasReachedBottom = false;
+                }
+            
+                // 3. Afficher le bouton UNIQUEMENT si on a touché le bas ET qu'on défile vers le haut
+                if (hasReachedBottom && currentScrollY < lastScrollY) {
+                    backToTopBtn.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
+                    backToTopBtn.classList.add("opacity-100", "translate-y-0");
+                } else {
+                    // Masquer dès qu'on redescend ou qu'on n'est plus dans le geste de remontée
+                    backToTopBtn.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
+                    backToTopBtn.classList.remove("opacity-100", "translate-y-0");
+                }
+            
+                lastScrollY = currentScrollY;
+            });
+        });     
         // pour le menu mobile 
         document.addEventListener("DOMContentLoaded", () => {
             const navLinks = document.querySelectorAll('.nav-link');
