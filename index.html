@@ -186,8 +186,15 @@ document.addEventListener("DOMContentLoaded", () => {
     <main class="overflow-x-hidden">
         <section id="about" class="scroll-mt-20 py-20 bg-neutral-primary max-w-7xl px-4 mx-auto">
             <div class="py-8 lg:py-16 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                <div class="flex justify-center" data-aos="fade-right">
-                    <div class="relative max-w-md lg:max-w-lg w-full overflow-hidden rounded-2xl">
+                <div class="flex justify-center relative p-6 group" data-aos="fade-right">
+                    <div
+                        class="absolute inset-2 border-2 border-orange-600/40 rounded-2xl rotate-3 transition-transform duration-500 group-hover:rotate-0">
+                    </div>
+                    <div
+                        class="absolute inset-2 border-2 border-gray-700 rounded-2xl -rotate-3 transition-transform duration-500 group-hover:rotate-0">
+                    </div>
+                    <div
+                        class="relative max-w-md lg:max-w-lg w-full overflow-hidden rounded-2xl border border-gray-800 bg-gray-800 shadow-2xl z-10">
                         <img src="./static/images/favicon/apropos.png" alt="Chimène"
                             class="w-full h-auto object-cover filter grayscale contrast-125 brightness-90">
                     </div>
@@ -1021,7 +1028,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         J'ai compris
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
